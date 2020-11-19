@@ -20,14 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7275d13c-6b22-4f28-8052-833ea8bba9e1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/.eslintrc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/package.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +59,7 @@
       <updated>1605441037461</updated>
       <workItem from="1605441038492" duration="772000" />
       <workItem from="1605516593964" duration="1000" />
-      <workItem from="1605815386451" duration="288000" />
+      <workItem from="1605815386451" duration="666000" />
     </task>
     <servers />
   </component>
@@ -83,5 +76,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="985" y="529" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605815800519">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state x="985" y="529" key="#com.intellij.fileTypes.FileTypeChooser/204.1440.1440.900/0.0.2560.1440@0.0.2560.1440" timestamp="1605815800519" />
   </component>
 </project>
