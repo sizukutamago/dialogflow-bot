@@ -10,11 +10,8 @@ const app = new App({
 (async () => {
     await app.start(process.env.APP_LISTEN_PORT || 8080);
 
-    console.log('⚡️ Bolt app is running!');
-    app.command('/ping', async ({ command, ack, say, respond }) => {
-        console.log(command);
-
-        await ack();
-        await say(`pong`);
+    app.message('hello', async ({ message, say }) => {
+        // say() sends a message to the channel where the event was triggered
+        await say(`Hey there <@${message.user}>!`);
     });
 })();
