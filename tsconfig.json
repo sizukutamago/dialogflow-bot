@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dest",
+    "strict": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true
+  },
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "include": [
+    "src/*.ts"
+  ],
+  "exclude": [
+    "node_modeles"
+  ],
+  "compileOnSave": true,
+  "types": [
+    "src/types/*"
+  ],
+  "rules": {
+    "eofline": true
+  }
+}

@@ -2,9 +2,11 @@
   "name": "rinbot",
   "version": "0.0.1",
   "description": "faq bot",
-  "main": "index.js",
+  "main": "dest/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dest/index.js",
+    "build": "tsc",
+    "build:watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,11 @@
   },
   "homepage": "https://github.com/sizukutamago/dialogflow-bot#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@slack/bolt": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.9"
   }
 }
