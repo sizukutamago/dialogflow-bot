@@ -1,11 +1,10 @@
-import * as config from "dotenv";
+import * as dotenv from "dotenv";
 
-config.config({ path: `envs/.env.${process.env.STAGE}` });
+const config = dotenv.config({ path: `envs/.env.${process.env.STAGE}` }).parsed;
 
-Object.keys(config).forEach(key => {
+for (const key in config) {
   process.env[key] = config[key];
-});
-
+}
 export namespace General {
   export const PORT = process.env.PORT as string;
 }
