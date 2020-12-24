@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-const config = dotenv.config({ path: `envs/.env.${process.env.STAGE}` }).parsed;
+const config = dotenv.config({ path: "../.env" }).parsed;
 
 for (const key in config) {
   process.env[key] = config[key];

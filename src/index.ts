@@ -1,8 +1,5 @@
 import * as Slack from "./bolt";
-import * as dotenv from "dotenv";
 import * as config from "./config";
-
-dotenv.config({ path: "../" });
 
 const app = Slack.app.app;
 
