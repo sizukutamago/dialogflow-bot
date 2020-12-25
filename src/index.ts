@@ -3,7 +3,7 @@ import * as config from "./config";
 
 const app = Slack.app.app;
 
-Slack.message.sayHello;
+Slack.messages.sayHello;
 Slack.middleware.enableAll(app);
 
 (async () => {
