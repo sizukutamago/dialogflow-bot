@@ -1,4 +1,5 @@
-export * as bolt from "./middleware"
+export * as interfaces from "./interfaces"
 export * as app from "./app"
-export * as message from "./messages"
-export * as middleware from "./middleware"
+export * as messages from "./messages"
+export * as middlewares from "./middlewares"
+export * as handlers from "./handlers";

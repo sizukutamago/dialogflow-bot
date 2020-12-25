@@ -1,18 +1,18 @@
 import * as config from "../config";
-import * as IF from "./interface";
+import * as types from "./interfaces";
 import { App } from "@slack/bolt";
 
 export const noThreadMessages: any = async ({
   message,
   next,
-}: IF.MiddlewareParam) => {
+}: types.MiddlewareParam) => {
   if (!message?.thread_ts) await next();
 };
 
 export const getOnlyMentionedMessages: any = async ({
   message,
   next,
-}: IF.MiddlewareParam) => {
+}: types.MiddlewareParam) => {
   // subtype が bot message なら後続の処理へ
   if (message?.subtype === "bot_message") await next();
   const bodyText = message?.text as string;

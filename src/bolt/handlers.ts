@@ -11,3 +11,8 @@ export const registerIntents = () => {
 export const showIntents = () => {
   return "fuga";
 };
+
+// TODO: 会話用
+export const chat = () => {
+  return "piyo";
+};
