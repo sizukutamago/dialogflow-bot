@@ -5,10 +5,6 @@ const config = dotenv.config({ path: "../.env" }).parsed;
 for (const key in config) {
   process.env[key] = config[key];
 }
-export namespace General {
-  export const PORT = process.env.PORT as string;
-}
-
 export namespace Slack {
   export const TOKEN = process.env.SLACK_BOT_TOKEN as string;
   export const SECRET = process.env.SLACK_SIGNING_SECRET as string;
