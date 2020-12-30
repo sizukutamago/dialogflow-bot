@@ -1,11 +1,14 @@
-import * as Slack from "./bolt";
+import * as bolt from "./bolt";
 import * as config from "./config";
 
-const app = Slack.app.app;
+const app = bolt.core.app;
 
-Slack.messages.sayHello;
-Slack.middleware.enableAll(app);
+bolt.middleware.enableAll(app);
 
 (async () => {
+  app.message("hello", async ({ message, say }) => {
+    // say() sends a message to the channel where the event was triggered
+    await say(`Hey there <@${message.user}>!`)
+  });
   await app.start(config.Slack.APP_LISTEN_PORT || 3000);
 })();
