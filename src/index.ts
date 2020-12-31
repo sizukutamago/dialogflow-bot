@@ -3,12 +3,12 @@ import * as config from "./config";
 
 const app = bolt.core.app;
 
-bolt.middleware.enableAll(app);
+bolt.middleware.getOnlyMentionedMessages;
 
 (async () => {
   app.message("hello", async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
-    await say(`Hey there <@${message.user}>!`)
+    await say(`Hey there <@${message.user}>!`);
   });
   await app.start(config.Slack.APP_LISTEN_PORT || 3000);
 })();

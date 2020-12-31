@@ -8,8 +8,7 @@ for (const key in config) {
 export namespace Slack {
   export const TOKEN = process.env.SLACK_BOT_TOKEN as string;
   export const SECRET = process.env.SLACK_SIGNING_SECRET as string;
-  export const CHANNEL = process.env.SLACK_CHANNEL as string;
-  export const FAQ_BOT_ID = process.env.SLACK_CHANNEL as string;
+  export const FAQ_BOT_ID = process.env.SLACK_FAQ_BOT_ID as string;
   export const APP_LISTEN_PORT = process.env.SLACK_APP_LISTEN_PORT as string;
 }
 
