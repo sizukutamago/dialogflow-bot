@@ -1,6 +1,4 @@
-import * as dotenv from "dotenv";
-
-const config = dotenv.config({ path: "../.env" }).parsed;
+const config = require('dotenv').config().parsed;
 
 for (const key in config) {
   process.env[key] = config[key];
