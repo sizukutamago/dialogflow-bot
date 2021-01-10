@@ -4,27 +4,29 @@
 	STAGE := prd
 	SERVICE_NAME := dialogflow-bot
 	PROJECT := dialogflow-bot
+  # DOCKER_FILE_PATH := 'docker/docker-compose.yml'
+  DOCKER_FILE_PATH := docker/docker-compose.yml
 
 # docker -------
 
 buildup:
-	docker-compose up -d --build
-up:
-	docker-compose up -d
+	docker-compose -f $(DOCKER_FILE_PATH) up -d --build
+:
+	docker-compose -f $(DOCKER_FILE_PATH) up -d
 down:
-	docker-compose down
+	docker-compose -f $(DOCKER_FILE_PATH) down
 down-v:
-	docker-compose down -v
+	docker-compose -f $(DOCKER_FILE_PATH) down -v
 down-all:
-	docker-compose down --rmi all --volumes --remove-orphans
+	docker-compose-f $(DOCKER_FILE_PATH)  down --rmi all --volumes --remove-orphans
 ps:
-	docker-compose ps
+	docker-compose -f $(DOCKER_FILE_PATH) ps
 restart:
-	docker-compose restart
+	docker-compose -f $(DOCKER_FILE_PATH) restart
 logs:
-	docker-compose logs $(arg)
+	docker-compose -f $(DOCKER_FILE_PATH) logs $(arg)
 logs-tail:
-	docker-compose logs -f --tail=500 $(arg)
+	docker-compose -f $(DOCKER_FILE_PATH) logs -f --tail=500 $(arg)
 
 # general -------
 init:

@@ -2,3 +2,7 @@ Dockerfile
 .dockerignore
 node_modules
 npm-debug.log
+.github
+.vscode
+.env.example
+

@@ -3,8 +3,8 @@ services:
   app:
     container_name: "bot"
     build:
-      dockerfile: Dockerfile
-      context: ./
+      dockerfile: docker/Dockerfile
+      context: ../
       args:
         STAGE: dev
     volumes:
@@ -14,4 +14,4 @@ services:
     tty: true
     stdin_open: true
     env_file:
-      - ./.env
+      - ../.env
