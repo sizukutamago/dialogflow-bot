@@ -1,14 +1,11 @@
 # variables ----
-
 	# STAGE := dev
 	STAGE := prd
 	SERVICE_NAME := dialogflow-bot
 	PROJECT := dialogflow-bot
-  # DOCKER_FILE_PATH := 'docker/docker-compose.yml'
   DOCKER_FILE_PATH := docker/docker-compose.yml
 
 # docker -------
-
 buildup:
 	docker-compose -f $(DOCKER_FILE_PATH) up -d --build
 :
