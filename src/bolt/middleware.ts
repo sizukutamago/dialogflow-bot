@@ -12,7 +12,7 @@ export const getOnlyMentionedMessages: any = async ({
   const bodyText = message?.text as string;
   // メンションされているかチェック、されていたら後続の処理へ
   const isMentioned = bodyText.includes(config.Slack.FAQ_BOT_ID);
-  if (isMentioned) await next();
+  if (isMentioned) await next;
 };
 
 export const enableAll = (app: App): void => {
