@@ -10,5 +10,5 @@ bolt.middleware.getOnlyMentionedMessages;
     // say() sends a message to the channel where the event was triggered
     await say(`Hey there <@${message.user}>!`);
   });
-  await app.start(config.Slack.APP_LISTEN_PORT || 3000);
+  await app.start(config.Slack.PORT || 3000);
 })();
