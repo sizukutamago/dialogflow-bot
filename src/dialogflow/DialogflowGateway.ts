@@ -4,19 +4,19 @@ import * as config from '../config'
 
 const intentsClient = new dialogflow.IntentsClient()
 
-let createIntent = async (): Promise<void> => {
+const createIntent = async (): Promise<void> => {
   const agentPath = intentsClient.agentPath(config.DialogFlow.PROJECT_ID);
 
-  let part: part = {
+  const part: part = {
     text: 'テスト練習'
   }
 
-  let trainingPhrases: trainingPhrases = [{
+  const trainingPhrases: trainingPhrases = [{
     type: 'EXAMPLE',
     parts: [part]
   }]
 
-  let intent: Intent = {
+  const intent: Intent = {
     displayName: 'test',
     trainingPhrases: trainingPhrases,
     messages: [{
