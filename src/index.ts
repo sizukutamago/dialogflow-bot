@@ -1,50 +1,36 @@
-import { App } from '@slack/bolt';
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-const dialogflow = require('@google-cloud/dialogflow');
+import * as bolt from "./bolt";
+import * as config from "./config";
+const dialogflow = require("@google-cloud/dialogflow");
 const sessionClient = new dialogflow.SessionsClient();
 
-const projectId = process.env.GCP_PROJECT_ID || '';
-const sessionId = '123456';
-const languageCode = 'ja';
+const detectIntent = async (query: string) => {
+  // The path to identify the agent that owns the created intent.
+  const sessionPath = sessionClient.projectAgentSessionPath(config.DialogFlow.PROJECT_ID, config.DialogFlow.SESSION_ID);
 
+  // The text query request.
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: config.DialogFlow.LANGUAGE_CODE,
+      },
+    },
+  };
 
-async function detectIntent(
-    query: string
-) {
-    // The path to identify the agent that owns the created intent.
-    const sessionPath = sessionClient.projectAgentSessionPath(
-        projectId,
-        sessionId
-    );
+  const responses = await sessionClient.detectIntent(request);
+  return responses[0];
+};
 
-    // The text query request.
-    const request = {
-        session: sessionPath,
-        queryInput: {
-            text: {
-                text: query,
-                languageCode: languageCode,
-            },
-        },
-    };
+const app = bolt.core.app;
 
-    const responses = await sessionClient.detectIntent(request);
-    return responses[0];
-}
-
-const app = new App({
-    token: process.env.SLACK_BOT_TOKEN,
-    signingSecret: process.env.SLACK_SIGNING_SECRET
-});
+bolt.middleware.getOnlyMentionedMessages;
 
 (async () => {
-    await app.start(process.env.APP_LISTEN_PORT || 8080);
-
-    app.message(/.*/, async ({ message, say }) => {
-        const intentResponse = await detectIntent(message.text || '');
-        // say() sends a message to the channel where the event was triggered
-        await say(intentResponse.queryResult.fulfillmentText);
-    });
+  app.message(/.*/, async ({ message, say }) => {
+    const intentResponse = await detectIntent(message.text || "");
+    // say() sends a message to the channel where the event was triggered
+    await say(intentResponse.queryResult.fulfillmentText);
+  });
+  await app.start(config.Slack.PORT || 3000);
 })();
