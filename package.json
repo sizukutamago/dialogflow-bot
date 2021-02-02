@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dest/index.js",
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "build:watch": "tsc --watch",
+    "lint": "eslint . --ext ts --fix"
   },
   "repository": {
     "type": "git",
