@@ -16,7 +16,7 @@ export type messages = {
     text: message
 }[]
 
-export interface Intent {
+export type Intent = {
     displayName: string
     trainingPhrases: trainingPhrases
     messages: messages

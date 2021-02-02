@@ -1,36 +1,70 @@
-import * as bolt from "./bolt";
-import * as config from "./config";
-const dialogflow = require("@google-cloud/dialogflow");
-const sessionClient = new dialogflow.SessionsClient();
+import * as bolt from './bolt';
+import * as config from './config'
+import DialogFlowGateway from './dialogflow/DialogflowGateway'
 
-const detectIntent = async (query: string) => {
-  // The path to identify the agent that owns the created intent.
-  const sessionPath = sessionClient.projectAgentSessionPath(config.DialogFlow.PROJECT_ID, config.DialogFlow.SESSION_ID);
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+(async (): Promise<void> => {
 
-  // The text query request.
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        text: query,
-        languageCode: config.DialogFlow.LANGUAGE_CODE,
-      },
-    },
-  };
+  const app = bolt.core.app
 
-  const responses = await sessionClient.detectIntent(request);
-  return responses[0];
-};
+  app.event('app_mention', async ({ payload, say }): Promise<void> => {
+    type UserElement = {
+      type: 'user'
+      user_id: string
+    }
 
-const app = bolt.core.app;
+    type TextElement = {
+      type: 'text',
+      text: string
+    }
 
-bolt.middleware.getOnlyMentionedMessages;
+    type Element = UserElement | TextElement
 
-(async () => {
-  app.message(/.*/, async ({ message, say }) => {
-    const intentResponse = await detectIntent(message.text || "");
+    type Elements = {
+      type: 'rich_text_section'
+      elements: Element[]
+    }
+
+    type Block = {
+      block_id: string
+      type: 'rich_text'
+      elements: Elements[]
+    }
+
+    const blocks = payload?.blocks as Block[] | undefined;
+
+    if (typeof blocks === 'undefined') {
+      await say('よくわかりませんでした')
+      return;
+    }
+
+    const block = blocks.find((block: Block): block is Block => {
+      return block.type === 'rich_text'
+    })
+
+    if (typeof block === 'undefined') {
+      await say('よくわかりませんでした')
+      return;
+    }
+
+    const elemnts: Element[] | undefined = block.elements?.find((elements: Elements) => {
+      return elements.type === 'rich_text_section'
+    })?.elements
+
+    const element = elemnts?.find((element): element is TextElement => {
+      return element.type === 'text';
+    })
+
+    if (typeof element === 'undefined') {
+      await say('よくわかりませんでした')
+      return;
+    }
+
+    const dialogFlowGateway = new DialogFlowGateway()
+    const intentResponse = await dialogFlowGateway.detectIntent(element.text || '')
     // say() sends a message to the channel where the event was triggered
-    await say(intentResponse.queryResult.fulfillmentText);
-  });
-  await app.start(config.Slack.PORT || 3000);
-})();
+    await say(intentResponse.queryResult?.fulfillmentText || '')
+    return;
+  })
+  await app.start(config.Slack.PORT || 3000)
+})()
