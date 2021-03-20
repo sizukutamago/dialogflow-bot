@@ -1,7 +1,7 @@
 import * as bolt from './bolt';
 import * as config from './config'
 import DialogFlowGateway from './dialogflow/DialogflowGateway'
-import type {Elements, Element, TextElement, Block} from "./bolt/types";
+import type {Elements, Element, TextElement, Block} from "./bolt/types"
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async (): Promise<void> => {
@@ -13,7 +13,7 @@ import type {Elements, Element, TextElement, Block} from "./bolt/types";
 
     if (typeof blocks === 'undefined') {
       await say('よくわかりませんでした')
-      return;
+      return
     }
 
     const block = blocks.find((block: Block): block is Block => {
@@ -22,7 +22,7 @@ import type {Elements, Element, TextElement, Block} from "./bolt/types";
 
     if (typeof block === 'undefined') {
       await say('よくわかりませんでした')
-      return;
+      return
     }
 
     const elements: Element[] | undefined = block.elements?.find((elements: Elements) => {
@@ -30,19 +30,19 @@ import type {Elements, Element, TextElement, Block} from "./bolt/types";
     })?.elements
 
     const element = elements?.find((element): element is TextElement => {
-      return element.type === 'text';
+      return element.type === 'text'
     })
 
     if (typeof element === 'undefined') {
       await say('よくわかりませんでした')
-      return;
+      return
     }
 
     const dialogFlowGateway = new DialogFlowGateway()
     const intentResponse = await dialogFlowGateway.detectIntent(element.text || '')
     // say() sends a message to the channel where the event was triggered
     await say(intentResponse.queryResult?.fulfillmentText || '')
-    return;
+    return
   })
   await app.start(config.Slack.PORT || 3000)
 })()

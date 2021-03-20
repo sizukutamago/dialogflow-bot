@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 const config = dotenv.config().parsed
 
 for (const k in config) {
-  process.env[k] = config[k];
+  process.env[k] = config[k]
 }
 
 export const Slack = {
