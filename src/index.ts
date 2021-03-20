@@ -1,6 +1,7 @@
 import * as bolt from './bolt';
 import * as config from './config'
 import DialogFlowGateway from './dialogflow/DialogflowGateway'
+import type {Elements, Element, TextElement, Block} from "./bolt/types";
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async (): Promise<void> => {
@@ -8,29 +9,6 @@ import DialogFlowGateway from './dialogflow/DialogflowGateway'
   const app = bolt.core.app
 
   app.event('app_mention', async ({ payload, say }): Promise<void> => {
-    type UserElement = {
-      type: 'user'
-      user_id: string
-    }
-
-    type TextElement = {
-      type: 'text',
-      text: string
-    }
-
-    type Element = UserElement | TextElement
-
-    type Elements = {
-      type: 'rich_text_section'
-      elements: Element[]
-    }
-
-    type Block = {
-      block_id: string
-      type: 'rich_text'
-      elements: Elements[]
-    }
-
     const blocks = payload?.blocks as Block[] | undefined;
 
     if (typeof blocks === 'undefined') {
@@ -47,11 +25,11 @@ import DialogFlowGateway from './dialogflow/DialogflowGateway'
       return;
     }
 
-    const elemnts: Element[] | undefined = block.elements?.find((elements: Elements) => {
+    const elements: Element[] | undefined = block.elements?.find((elements: Elements) => {
       return elements.type === 'rich_text_section'
     })?.elements
 
-    const element = elemnts?.find((element): element is TextElement => {
+    const element = elements?.find((element): element is TextElement => {
       return element.type === 'text';
     })
 
