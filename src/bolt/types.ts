@@ -30,5 +30,28 @@ export type Elements = {
 export type Block = {
   block_id: string
   type: 'rich_text'
-  elements: Elements[]
+  elements: Elements[],
+  thread_ts: string,
+  parent_user_id: string,
+}
+
+export type Message = {
+  text: string,
+  type: 'message',
+  blocks: Block[],
+}
+
+export type ThreadMessage = Message & {
+  thread_ts: string,
+  reply_count: number,
+}
+
+export type Result = {
+  isQuestion: boolean,
+  text: string
+}
+
+export type APIResult = {
+  ok: boolean,
+  messages?: Message[] | ThreadMessage[]
 }

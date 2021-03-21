@@ -4,7 +4,7 @@
   "description": "faq bot",
   "main": "dest/index.js",
   "scripts": {
-    "start": "node dest/index.js",
+    "start": "tsc && node dest/index.js",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "lint": "eslint . --ext ts --fix"

@@ -6,14 +6,14 @@ export default class IntentBuilder {
     messages?: string
 
     setDisplay(displayName: string): this & Pick<Intent, 'displayName'> {
-        return Object.assign(this, {displayName})
+        return Object.assign(this, {displayName: `test ${displayName}`})
     }
 
-    setTrainingPrases(trainingPhrases: string): this & Pick<Intent, 'trainingPhrases'> {
+    setTrainingPhrase(trainingPhrase: string): this & Pick<Intent, 'trainingPhrases'> {
         return Object.assign(this, {
             trainingPhrases: {
                 type: 'EXAMPLE',
-                parts: [{text: trainingPhrases}]
+                parts: [{text: trainingPhrase}]
             }
         })
     }

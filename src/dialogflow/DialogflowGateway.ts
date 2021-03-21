@@ -1,6 +1,6 @@
-import {part, trainingPhrases, Intent} from './types'
 import {IntentsClient, SessionsClient} from '@google-cloud/dialogflow'
 import * as config from '../config'
+import IntentBuilder from "./IntentBuilder";
 
 const intentsClient = new IntentsClient()
 
@@ -12,36 +12,18 @@ export default class DialogFlowGateway {
     this.sessionClient = new SessionsClient()
   }
 
-  createIntent = async (): Promise<void> => {
+  createIntent = async (question: string, answer: string): Promise<void> => {
     const agentPath = intentsClient.agentPath(config.DialogFlow.PROJECT_ID);
-    const part: part = {
-      text: 'テスト練習'
-    }
 
-    const trainingPhrases: trainingPhrases = [{
-      type: 'EXAMPLE',
-      parts: [part]
-    }]
-
-    const intent: Intent = {
-      displayName: 'test',
-      trainingPhrases: trainingPhrases,
-      messages: [{
-        text: {
-          text: ['aaaa']
-        }
-      }]
-    }
+    const intentBuilder = new IntentBuilder();
+    const intent = intentBuilder.setDisplay(question).setTrainingPhrase(question).setMessages(answer).build()
 
     const createIntentRequest = {
       parent: agentPath,
       intent
     }
 
-    console.log(intent)
-
-    const [response] = await intentsClient.createIntent(createIntentRequest)
-    console.log(response)
+    await intentsClient.createIntent(createIntentRequest)
   }
 
  detectIntent = async (query: string) => {
